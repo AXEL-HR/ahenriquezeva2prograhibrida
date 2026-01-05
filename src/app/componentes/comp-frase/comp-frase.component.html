@@ -1,3 +1,17 @@
-<p>
-  comp-frase works!
-</p>
+<ion-card [color]="color" class="card-frase">
+  <ion-card-content>
+    <ion-card-title class="texto-frase">"{{frase.texto}}"</ion-card-title>
+    <ion-card-subtitle class="autor-frase"> - {{frase.autor}}</ion-card-subtitle>
+  </ion-card-content>
+  <ion-card-footer>
+     <ion-buttons slot="end">
+        <ion-button 
+          *ngIf="botonBorrar"
+          fill="clear" 
+          color="danger" 
+          (click)="onDelete()"
+        >
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+  </ion-card-footer>

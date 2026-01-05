@@ -1,6 +1,5 @@
-export class Frases {
-    constructor(
-        public texto: string,
-        public autor: string
-    ) {}
+export interface Frases {
+    id? : number;
+    texto: string;
+    autor: string;
 }
