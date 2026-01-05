@@ -3,8 +3,8 @@
     <ion-card-title class="texto-frase">"{{frase.texto}}"</ion-card-title>
     <ion-card-subtitle class="autor-frase">— {{frase.autor}}</ion-card-subtitle>
   </ion-card-content>
-  <ion-card-footer>
-     <div *ngIf="mostrarBotonEliminar" class="acciones">
+  <ion-footer>
+     <div *ngIf="botonBorrar" class="acciones">
       <ion-button 
         color="danger" 
         size="small"
@@ -13,4 +13,4 @@
         Eliminar
       </ion-button>
     </div>
-  </ion-card-footer>
+  </ion-footer>

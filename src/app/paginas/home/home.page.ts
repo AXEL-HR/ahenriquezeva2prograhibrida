@@ -4,12 +4,14 @@ import { ConfiguracionServicio } from 'src/app/servicios/configuracion-servicio'
 import { FraseServicio } from 'src/app/servicios/frase-servicio';
 import { Frases } from 'src/app/modelo/frases';
 import { CommonModule } from '@angular/common';
+import { CompFraseComponent } from 'src/app/componentes/comp-frase/comp-frase.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonButton, IonHeader, IonToolbar, IonTitle, IonContent, CommonModule],
+  standalone: true,
+  imports: [IonButton, IonHeader, IonToolbar, IonTitle, IonContent, CommonModule, CompFraseComponent],
 })
 
 export class HomePage implements OnInit {

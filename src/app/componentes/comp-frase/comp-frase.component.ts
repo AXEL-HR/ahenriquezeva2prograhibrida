@@ -1,12 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Frases } from 'src/app/modelo/frases';
+import { IonButton, IonCard, IonCardContent, IonCardTitle, IonCardSubtitle, IonFooter} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-comp-frase',
   templateUrl: './comp-frase.component.html',
   styleUrls: ['./comp-frase.component.scss'],
   standalone: true,
-  imports: [Input, Output, EventEmitter],
+  imports: [CommonModule, IonCard, IonCardContent, IonCardTitle, IonCardSubtitle, IonButton, IonFooter],
 })
 export class CompFraseComponent {
 
@@ -17,7 +19,7 @@ export class CompFraseComponent {
   
   @Output() borrar = new EventEmitter<number>();
 
-  onDelete(): void {
+  alEliminar(): void {
     if (this.frase.id) {
       this.borrar.emit(this.frase.id);
     }

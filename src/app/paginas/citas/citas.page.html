@@ -11,9 +11,9 @@
 
   <div *ngFor="let cita of citas" class="lista-citas">
     <app-comp-frase 
-      [Frases]="cita"
+      [Frases]="Citas"
       [botonBorrar]="true"
-      (borrar)="onDelete($event)"
+      (borrar)="alEliminarCita($event)"
     ></app-comp-frase>
   </div>
 </ion-content>
