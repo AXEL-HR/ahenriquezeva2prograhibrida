@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Frases } from '../modelo/frases';
+import { Platform } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +19,16 @@ export class FraseServicio {
     const citasAleatorias = Math.floor(Math.random() * this._citas.length);
     return [this._citas[citasAleatorias]];
   }
-  eliminarCita(id: number): void {
+  obtenerTodasCitas(): Frases[] {
+    return [...this._citas];
+  }
+  obtenerCitasTotales(): Frases[] {
+    return [...this._citas];
+  }
+  eliminarCita(id: number): boolean {
+    const citaLongitud = this._citas.length;
     this._citas = this._citas.filter(cita => cita.id !== id);
+    return this._citas.length < 0;
   }
   agregarCita(texto: string, autor: string): Frases {
     const nuevaCita: Frases = {

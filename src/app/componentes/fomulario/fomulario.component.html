@@ -1,3 +1,59 @@
-<p>
-  fomulario works!
-</p>
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Agregar Nueva Cita</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-item>
+      <ion-label position="floating">Frase *</ion-label>
+      <ion-textarea 
+        [(ngModel)]="textoCita"
+        (ionChange)="alCambiarTexto()"
+        rows="3"
+        placeholder="Ingresa la frase..."
+        [class.campo-invalido]="errorTexto && mostrarErrores"
+      ></ion-textarea>
+    </ion-item>
+    
+    <div *ngIf="errorTexto && mostrarErrores" class="mensaje-error">
+      <ion-text color="danger">
+        <small>{{ errorTexto }}</small>
+      </ion-text>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Autor *</ion-label>
+      <ion-input 
+        [(ngModel)]="autorCita"
+        (ionChange)="alCambiarAutor()"
+        type="text"
+        placeholder="Nombre del autor..."
+        [class.campo-invalido]="errorAutor && mostrarErrores"
+      ></ion-input>
+    </ion-item>
+
+    <div *ngIf="errorAutor && mostrarErrores" class="mensaje-error">
+      <ion-text color="danger">
+        <small>{{ errorAutor }}</small>
+      </ion-text>
+    </div>
+
+    <div class="botones">
+      <ion-button 
+        color="medium" 
+        fill="clear"
+        (click)="alLimpiar()"
+      >
+        Limpiar
+      </ion-button>
+      
+      <ion-button 
+        color="primary" 
+        (click)="alEnviar()"
+        [disabled]="!formularioValido() || enviando"
+      >
+        {{ enviando ? 'Agregando...' : 'Agregar Cita' }}
+      </ion-button>
+    </div>
+  </ion-card-content>
+</ion-card>

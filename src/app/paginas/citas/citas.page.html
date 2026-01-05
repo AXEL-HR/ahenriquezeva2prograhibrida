@@ -1,13 +1,19 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>citas</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Gestión de Citas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">citas</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <app-formulario 
+    (citaAgregada)="alAgregarCita($event)"
+  ></app-formulario>
+
+  <div *ngFor="let cita of citas" class="lista-citas">
+    <app-comp-frase 
+      [Frases]="cita"
+      [botonBorrar]="true"
+      (borrar)="onDelete($event)"
+    ></app-comp-frase>
+  </div>
 </ion-content>

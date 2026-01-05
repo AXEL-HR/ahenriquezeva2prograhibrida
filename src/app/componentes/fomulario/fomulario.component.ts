@@ -1,56 +1,86 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ValidacionServicio } from 'src/app/servicios/validacion-servicio';
 
 @Component({
-  selector: 'app-fomulario',
+  selector: 'app-formulario',
   templateUrl: './fomulario.component.html',
   styleUrls: ['./fomulario.component.scss'],
   standalone: true,
   imports: [Output, EventEmitter],
 })
 export class FomularioComponent {
-  @Output() agregar = new EventEmitter<{autor: string; texto: string;}>();
+  @Output() citaAgregada = new EventEmitter<{texto: string, autor: string}>();
 
-  formFrase: FormGroup
-  seSubio: boolean = false;
+  textoCita: string = '';
+  autorCita: string = '';
+  enviando: boolean = false;
 
-  constructor(private fb: FormBuilder) { 
-    this.formFrase = this.fb.group({
-      autor: ['', [Validators.required, Validators.minLength(2)]],
-      texto: ['', [Validators.required, Validators.minLength(5)]],
-    });
-  }
-  get texto() { return this.formFrase.get('texto'); }
-  get autor() { return this.formFrase.get('autor'); }
+  errorTexto: string  = '';
+  errorAutor: string  = '';
 
-  onSubmit(): void {
-    if (this.formFrase.valid) {
-      this.seSubio = true;
-  }
-    const nuevaCita = {
-      autor: this.formFrase.value.autor.trim(),
-      texto: this.formFrase.value.texto.trim()
-    };
-    this.agregar.emit(nuevaCita);
+  mostrarErrores: boolean = false;
 
-    this.formFrase.reset();
-    this.seSubio = false;
+  constructor(private servicioValidacion: ValidacionServicio) {}
+
+  validarCampos(): void {
+    this.errorTexto = '';
+    this.errorAutor = '';
+    
+    const validacionTexto = this.servicioValidacion.validarTexto(this.textoCita);
+    if (!validacionTexto.valido) {
+      this.errorTexto = validacionTexto.mensaje;
     }
     
-    getMensajeError(campo: string): string {
-    const control = this.formFrase.get(campo);
-  
-    if (!control || !control.errors || !control.touched) {
-      return '';
+    const validacionAutor = this.servicioValidacion.validarAutor(this.autorCita);
+    if (!validacionAutor.valido) {
+      this.errorAutor = validacionAutor.mensaje;
     }
-    if (control.errors['required']) {
-      return 'Este campo es obligatorio';
+  }
+
+  alEnviar(): void {
+    this.validarCampos();
+    this.mostrarErrores = true;
+
+    if (!this.errorTexto && !this.errorAutor) {
+      this.enviando = true;
+      
+      const nuevaCita = {
+        texto: this.textoCita.trim(),
+        autor: this.autorCita.trim()
+      };
+
+      this.citaAgregada.emit(nuevaCita);
+      
+      this.textoCita = '';
+      this.autorCita = '';
+      this.mostrarErrores = false;
+      this.enviando = false;
     }
-    if (control.errors['minlength']) {
-      const requiredLength = control.errors['minlength'].requiredLength;
-      return `Mínimo ${requiredLength} caracteres`;
+  }
+
+  alLimpiar(): void {
+    this.textoCita = '';
+    this.autorCita = '';
+    this.errorTexto = '';
+    this.errorAutor = '';
+    this.mostrarErrores = false;
+  }
+
+  alCambiarTexto(): void {
+    if (this.mostrarErrores) {
+      this.validarCampos();
     }
-    return 'Campo inválido';
-  
+  }
+
+  alCambiarAutor(): void {
+    if (this.mostrarErrores) {
+      this.validarCampos();
+    }
+  }
+
+  formularioValido(): boolean {
+    return !this.errorTexto && !this.errorAutor && 
+           this.textoCita.trim().length >= 5 && 
+           this.autorCita.trim().length >= 2;
   }
 }

@@ -14,7 +14,6 @@ export class CompFraseComponent {
 
   @Input() frase!: Frases;
   @Input() botonBorrar: boolean = false;
-  @Input() color: string = 'primary';
   
   @Output() borrar = new EventEmitter<number>();
 
