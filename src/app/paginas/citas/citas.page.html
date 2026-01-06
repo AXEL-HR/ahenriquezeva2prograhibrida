@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>Gestión de Citas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="alLimpiarTodasCitas()">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -11,7 +16,7 @@
 
   <div *ngFor="let cita of citas" class="lista-citas">
     <app-comp-frase 
-      [Frases]="Citas"
+      [cita]="cita"
       [botonBorrar]="true"
       (borrar)="alEliminarCita($event)"
     ></app-comp-frase>

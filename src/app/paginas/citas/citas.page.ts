@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonFabButton } from '@ionic/angular/standalone';
 import { FraseServicio } from 'src/app/servicios/frase-servicio';
 import { CompFraseComponent } from 'src/app/componentes/comp-frase/comp-frase.component';
 import { FomularioComponent } from 'src/app/componentes/fomulario/fomulario.component';
@@ -12,7 +12,8 @@ import { Frases } from 'src/app/modelo/frases';
   templateUrl: './citas.page.html',
   styleUrls: ['./citas.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, CompFraseComponent, FomularioComponent],
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,
+     CompFraseComponent, FomularioComponent],
 })
 export class CitasPage implements OnInit {
 
@@ -21,6 +22,10 @@ export class CitasPage implements OnInit {
   constructor(private servicioCitas: FraseServicio) {}
 
   ngOnInit(): void {
+    this.cargarCitas();
+  }
+
+  ionViewWillEnter(): void {
     this.cargarCitas();
   }
 
@@ -36,6 +41,13 @@ export class CitasPage implements OnInit {
   alEliminarCita(id: number): void {
     if (confirm('¿Estás seguro de eliminar esta cita?')) {
       this.servicioCitas.eliminarCita(id);
+      this.cargarCitas();
+    }
+  }
+
+  alLimpiarTodasCitas(): void {
+    if (confirm('¿Estás seguro de eliminar todas las citas? Esta acción no se puede deshacer.')) {
+      this.servicioCitas.limpiarTodasCitas();
       this.cargarCitas();
     }
   }

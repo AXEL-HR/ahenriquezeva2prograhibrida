@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Component, Output, EventEmitter } from '@angular/core';
 import { ValidacionServicio } from 'src/app/servicios/validacion-servicio';
 import { IonButton, IonCard, IonCardContent, IonCardTitle, IonLabel , IonInput, IonText, IonCardHeader, IonItem, IonTextarea} from '@ionic/angular/standalone';
@@ -9,7 +9,7 @@ import { IonButton, IonCard, IonCardContent, IonCardTitle, IonLabel , IonInput, 
   styleUrls: ['./fomulario.component.scss'],
   standalone: true,
   imports: [CommonModule , IonCard, IonCardContent, IonCardTitle, IonButton , IonCardHeader ,
-     IonItem , IonLabel, IonTextarea, IonText , IonInput, ReactiveFormsModule],
+     IonItem , IonLabel, IonTextarea, IonText , IonInput, FormsModule],
 })
 export class FomularioComponent {
   @Output() citaAgregada = new EventEmitter<{texto: string, autor: string}>();
