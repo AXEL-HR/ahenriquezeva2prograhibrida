@@ -16,7 +16,7 @@
 
   <div *ngFor="let cita of citas" class="lista-citas">
     <app-comp-frase 
-      [cita]="cita"
+      [frase]="cita"
       [botonBorrar]="true"
       (borrar)="alEliminarCita($event)"
     ></app-comp-frase>

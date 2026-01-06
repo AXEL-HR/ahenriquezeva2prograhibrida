@@ -6,7 +6,11 @@
 
 <ion-content>
   <div *ngIf="citaActual" class="contenedor-cita">
-    <app-comp-frase [frase]="citaActual"></app-comp-frase>
+    <app-comp-frase 
+    [frase]="citaActual"
+    [botonBorrar]="sePuedeEliminar"
+    (eliminar)="cargarCitaAleatoria()"
+    ></app-comp-frase>
     
     <div class="botones">
       <ion-button expand="block" (click)="cambiarCita()">
@@ -21,5 +25,12 @@
         Configuración
       </ion-button>
     </div>
+  </div>
+
+  <div *ngIf="!citaActual || citaActual.texto === 'No hay citas disponibles'" class="sin-citas">
+    <p>No hay citas disponibles. Agrega algunas citas primero.</p>
+    <ion-button expand="block" routerLink="/citas">
+      Agregar Citas
+    </ion-button>
   </div>
 </ion-content>

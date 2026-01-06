@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonFabButton } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonButton, IonIcon } from '@ionic/angular/standalone';
 import { FraseServicio } from 'src/app/servicios/frase-servicio';
 import { CompFraseComponent } from 'src/app/componentes/comp-frase/comp-frase.component';
 import { FomularioComponent } from 'src/app/componentes/fomulario/fomulario.component';
@@ -13,7 +13,7 @@ import { Frases } from 'src/app/modelo/frases';
   styleUrls: ['./citas.page.scss'],
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,
-     CompFraseComponent, FomularioComponent],
+     CompFraseComponent, FomularioComponent, IonButtons, IonButton, IonIcon],
 })
 export class CitasPage implements OnInit {
 

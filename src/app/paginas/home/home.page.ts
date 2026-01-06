@@ -16,11 +16,19 @@ import { CompFraseComponent } from 'src/app/componentes/comp-frase/comp-frase.co
 
 export class HomePage implements OnInit {
   citaActual: Frases | null = null;
+  sePuedeEliminar: boolean = false;
 
-  constructor(private servicioCitas: FraseServicio) {}
+  constructor(private servicioCitas: FraseServicio
+    , private servicioConfiguracion: ConfiguracionServicio
+  ) {}
 
   ngOnInit(): void {
     this.cargarCitaAleatoria();
+    this,this.cargarCitaAleatoria();
+  }
+
+  cargarConfiguracion(): void {
+    this.sePuedeEliminar = this.servicioConfiguracion.obtenersePuedeEliminar();
   }
 
   cargarCitaAleatoria(): void {
@@ -30,5 +38,18 @@ export class HomePage implements OnInit {
 
   cambiarCita(): void {
     this.cargarCitaAleatoria();
+  }
+
+  eliminarCita(id: number): void {
+    if (this.sePuedeEliminar) {
+      if (confirm('¿Estás seguro de eliminar esta cita?')) {
+        const eliminada = this.servicioCitas.eliminarCita(id);
+        if (eliminada) {
+          this.cargarCitaAleatoria();
+        }
+      }
+    } else {
+      alert('La eliminación de citas en el inicio está deshabilitada en la configuración');
+    }
   }
 }

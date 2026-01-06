@@ -6,6 +6,9 @@
 
 <ion-content>
   <ion-list>
+    <ion-list-header>
+      <ion-label>Opciones de la Aplicación</ion-label>
+    </ion-list-header>
     <ion-item>
       <ion-label class="ion-text-wrap">
         ¿Desea poder borrar citas en el inicio (frase aleatoria)?
@@ -15,5 +18,12 @@
         (ionChange)="alCambiarConfiguracion()"
       ></ion-toggle>
     </ion-item>
+    <ion-item button (click)="alRestablecerConfiguracion()" color="medium">
+      <ion-icon slot="start" name="refresh-outline"></ion-icon>
+      <ion-label>Restablecer Configuración</ion-label>
+    </ion-item>
   </ion-list>
+  <div class="informacion">
+    <p><small>La configuración se guarda automáticamente y persiste después de cerrar la aplicación.</small></p>
+  </div>
 </ion-content>
